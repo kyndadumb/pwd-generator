@@ -27,7 +27,7 @@ if __name__ == '__main__':
     with open('credentials.txt', 'w') as file:
         file.write('')
 
-    for username in args.m:
+    for username in args.u:
         password = generate_pwd(password_length)
         try:
             save_credentials(username, password)
