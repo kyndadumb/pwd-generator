@@ -9,32 +9,30 @@ def generate_pwd(length):
 
 def save_credentials(username, password):
     try:
-        with open('credentials.txt', 'w') as file:
+        with open('credentials.txt', 'a') as file:
             file.write(f'Benutzername: {username}\n')
-            file.write(f'Passwort: {password}')
+            file.write(f'Passwort: {password}\n\n')
     except Exception as e:
         print(f"Fehler beim Speichern der Datei: {e}")
         exit(1)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Passwortgenerator')
-    parser.add_argument('username', type=str, help='Nutzername')
-    parser.add_argument('--l', type=int, default=16, help='Länge')
+    parser.add_argument('--l', type=int, default=16, help='Länge des Passworts (Standard: 16)')
+    parser.add_argument('--u', nargs='+', type=str, required=True, help='Nutzernamen (mindestens einer)')
     args = parser.parse_args()
 
-    username = args.username
     password_length = args.l
 
-    if password_length <= 0:
-        print("Fehler: Die Passwortlänge muss größer als 0 sein.")
-        exit(1)
+    with open('credentials.txt', 'w') as file:
+        file.write('')
 
-    password = generate_pwd(password_length)
-    
-    try:
-        save_credentials(username, password)
-    except Exception as e:
-        print(f"Fehler beim Speichern der Anmeldedaten: {e}")
-        exit(1)
+    for username in args.m:
+        password = generate_pwd(password_length)
+        try:
+            save_credentials(username, password)
+        except Exception as e:
+            print(f"Fehler beim Speichern der Anmeldedaten für {username}: {e}")
+            exit(1)
 
-    print(f'Benutzername: {username}\nPasswort: {password}')
+        print(f'Benutzername: {username}\nPasswort: {password}\n')
