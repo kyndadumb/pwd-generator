@@ -8,10 +8,3 @@ Aufruf: ``python main.py --l [Länge] --u [Benutzername] [Benutzername2] [Benutz
 
 ## Hilfe
 Aufruf: ``python main.py --help``
-
-Passwortgenerator
-
-options:
-  -h, --help     show this help message and exit
-  --l L          Länge des Passworts (Standard: 16)
-  --u U [U ...]  Nutzernamen (mindestens einer)
